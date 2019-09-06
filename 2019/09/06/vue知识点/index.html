@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue,面试题,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gzzzh" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前言这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…">
+<meta name="keywords" content="Vue,面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue知识点">
+<meta property="og:url" content="https://gzzzzh.github.io/2019/09/06/vue知识点/index.html">
+<meta property="og:site_name" content="Gzzzh">
+<meta property="og:description" content="前言这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1257601889.cos.ap-shanghai.myqcloud.com/vue/vue-mvvm-jiagou.png">
+<meta property="og:updated_time" content="2019-09-06T07:08:52.537Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue知识点">
+<meta name="twitter:description" content="前言这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…">
+<meta name="twitter:image" content="https://blog-1257601889.cos.ap-shanghai.myqcloud.com/vue/vue-mvvm-jiagou.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://gzzzzh.github.io/2019/09/06/vue知识点/">
+
+
+
+
+
+  <title>vue知识点 | Gzzzh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gzzzh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gzzzzh.github.io/2019/09/06/vue知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gzzzh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gzzzh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T15:07:17+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…<br><a id="more"></a></p>
+<h2 id="双向数据绑定原理"><a href="#双向数据绑定原理" class="headerlink" title="双向数据绑定原理"></a>双向数据绑定原理</h2><p>vue采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的getter，setter，在数据变动时触发set函数通知发布中心发布信息给订阅者，触发相应的监听回调(更新视图)</p>
+<p>此时我们需要一个监听器Observer来监听属性的变化，得知属性发生变化后需要一个Watcher订阅者来更新视图，我们还需要一个compile指令解析器，用于解析我们的节点元素指令和初始化视图</p>
+<ul>
+<li>Observer监听器：用来监听属性的变化通知订阅者，Object.defineProperty()就是在这个地方进行数据劫持</li>
+<li>Watcher订阅者(可以理解为一个dom)：收到属性的变化，然后去更新视图，原理是某个属性改变后执行订阅了这个属性的订阅者的更新方法，更新方法为订阅者进行dom操作修改这个属性的新值，从而更新视图</li>
+<li>Compile解析器 ：解析指令，初始化模板，订阅数据变化（定义在view层能够监听到数据变化的事件），绑定更新函数（给订阅者绑定某个属性更新的方法，让他能在收到此属性改变的通知时对这个属性进行视图更新）</li>
+</ul>
+<p><img src="https://blog-1257601889.cos.ap-shanghai.myqcloud.com/vue/vue-mvvm-jiagou.png" alt></p>
+<h2 id="MVVM的理解"><a href="#MVVM的理解" class="headerlink" title="MVVM的理解"></a>MVVM的理解</h2><h4 id="MVVM是Model-View-ViewModel缩写"><a href="#MVVM是Model-View-ViewModel缩写" class="headerlink" title="MVVM是Model-View-ViewModel缩写"></a>MVVM是Model-View-ViewModel缩写</h4><ul>
+<li>Model代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑</li>
+<li>View代表UI组件，他负责将数据模型转化为UI展示出来</li>
+<li>ViewModel监听模型数据的改变和控制视图行为，处理用户交互，简单来说就是一个同步view和model的对象，连接他们</li>
+</ul>
+<p>在MVVM架构下，View和Model之间没有直接联系，而是通过ViewModel进行交互，ViewModel将两者通过双向数据绑定连接起来，View的数据变化会马上同步到Model中，而Model数据变化也会反映到View上</p>
+<h2 id="Vue生命周期"><a href="#Vue生命周期" class="headerlink" title="Vue生命周期"></a>Vue生命周期</h2><p>在Vue实例开始创建，初始化数据，编译模板，挂载Dom→渲染，更新→渲染，卸载等一系列过程，称为生命周期，简单来说就是Vue实例从创建到销毁的过程</p>
+<h4 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h4><p>Vue实例刚刚创建出来，data，methods，watch，computed都不能访问</p>
+<h4 id="created"><a href="#created" class="headerlink" title="created"></a>created</h4><p>此时data等可以访问，可以在此时进行一部分请求，不宜太多，因为会导致白屏时间过长，$el不能访问，$refs是一个空数组，需要操作dom的话要使用nextTick</p>
+<h4 id="beforeMount"><a href="#beforeMount" class="headerlink" title="beforeMount"></a>beforeMount</h4><p>模板在内存中已经编译好，但是还没渲染到页面上，此时访问html里面的元素可以发现模板字符串还没替换过来</p>
+<h4 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a>mounted</h4><p>完成挂载dom和双向数据绑定，可以对dom进行操作，访问$ref。代表内存中模板已经挂载到页面中，可以看到渲染好的页面</p>
+<h4 id="beforeUpdate"><a href="#beforeUpdate" class="headerlink" title="beforeUpdate"></a>beforeUpdate</h4><p>此时data数据更新了，页面的数据还没进行更新</p>
+<h4 id="updated"><a href="#updated" class="headerlink" title="updated"></a>updated</h4><p>更新已经完毕，不能在此时修改数据，会陷入死循环</p>
+<h4 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a>beforeDestroy</h4><p>实例销毁之前，data等还可以进行访问，可以进行提示操作</p>
+<h4 id="destroyed"><a href="#destroyed" class="headerlink" title="destroyed"></a>destroyed</h4><p>当前实例已经被删除，data等无法使用</p>
+<h4 id="activated"><a href="#activated" class="headerlink" title="activated"></a>activated</h4><p>在使用vue-router的时候会使用到keepalive缓存组件，此时组件的created等生命周期函数无法触发，进入缓存组件时触发此函数</p>
+<h4 id="deactivated"><a href="#deactivated" class="headerlink" title="deactivated"></a>deactivated</h4><p>当在keepalive组件离开时就会触发。以上这两个周期函数只有在使用到了keepalive才会有，触发顺序为Created→Mounted→activated</p>
+<h2 id="Vue组件通信方法"><a href="#Vue组件通信方法" class="headerlink" title="Vue组件通信方法"></a>Vue组件通信方法</h2><h4 id="props和-emit-父子"><a href="#props和-emit-父子" class="headerlink" title="props和$emit(父子)"></a>props和$emit(父子)</h4><p>父组件向子组件传递数据时通过prop传递的，子组件传递数据给父组件是通过$emit触发事件来做到的</p>
+<h4 id="attrs和-listeners-父子"><a href="#attrs和-listeners-父子" class="headerlink" title="$attrs和$listeners(父子)"></a>$attrs和$listeners(父子)</h4><p>当存在 组件A→组件B组件C 这时候A想传递给C用第一种方法会传递必须分步进行，此时在Vue2.4提供了新方法</p>
+<p>A往B传递数据和方法，在B中通过prop获取属于自己的，剩下不属于B的数据和方法 在B中通过v-bind=”$attrs”和v-on=”$listeners”传递下去给C</p>
+<h4 id="EventBus-中央事件总线-（任意）"><a href="#EventBus-中央事件总线-（任意）" class="headerlink" title="EventBus(中央事件总线)（任意）"></a>EventBus(中央事件总线)（任意）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个Vue实例</span></span><br><span class="line"><span class="keyword">const</span> bus = <span class="keyword">new</span> Vue()</span><br><span class="line"></span><br><span class="line"><span class="comment">//触发事件</span></span><br><span class="line">bus.$emit(<span class="string">'xxx'</span>,val)</span><br><span class="line"></span><br><span class="line"><span class="comment">//监听事件</span></span><br><span class="line">bus.$on(<span class="string">'xxx'</span>,val=&gt; <span class="built_in">console</span>.log(val)</span><br></pre></td></tr></table></figure>
+<h4 id="provide和inject（父子）"><a href="#provide和inject（父子）" class="headerlink" title="provide和inject（父子）"></a>provide和inject（父子）</h4><p>这个用法主要是为高阶插件和组件库提供用例，并不推荐直接用于应用程序代码中</p>
+<p>父组件中通过provider对象中的数据来提供变量，然后在子组件中通过inject来注入变量。不论子组件有多深，只要调用了injectname就可以注入provider中的数据，只要在父组件的生命周期内，子组件都可以调用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">provider:&#123;</span><br><span class="line">    <span class="keyword">for</span>:<span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">inject:[<span class="string">'for'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="v-model（父子）"><a href="#v-model（父子）" class="headerlink" title="v-model（父子）"></a>v-model（父子）</h4><p>父组件通过v-model传递值给子组件时，会自动传递一个value的prop属性，在子组件中通过this.$emit(‘input’,val)可以自动修改v-model的值</p>
+<h4 id="parent和-children"><a href="#parent和-children" class="headerlink" title="$parent和$children"></a>$parent和$children</h4><p>可以获取父组件实例和子组件实例<br>this.$children是个数组</p>
+<h4 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h4><p>单独详解</p>
+<h2 id="初始化data"><a href="#初始化data" class="headerlink" title="初始化data"></a>初始化data</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(<span class="keyword">this</span>.data,<span class="keyword">this</span>.$options.data())</span><br></pre></td></tr></table></figure>
+<p>this.data是表示当前的改变后的this中的数据，而this.$options.data()是表示没有赋值前的this中的数据</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/js知识点-施工中/" rel="next" title="js知识点(施工中)">
+                <i class="fa fa-chevron-left"></i> js知识点(施工中)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Gzzzh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向数据绑定原理"><span class="nav-number">2.</span> <span class="nav-text">双向数据绑定原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVVM的理解"><span class="nav-number">3.</span> <span class="nav-text">MVVM的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVVM是Model-View-ViewModel缩写"><span class="nav-number">3.0.1.</span> <span class="nav-text">MVVM是Model-View-ViewModel缩写</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue生命周期"><span class="nav-number">4.</span> <span class="nav-text">Vue生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeCreate"><span class="nav-number">4.0.1.</span> <span class="nav-text">beforeCreate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#created"><span class="nav-number">4.0.2.</span> <span class="nav-text">created</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeMount"><span class="nav-number">4.0.3.</span> <span class="nav-text">beforeMount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mounted"><span class="nav-number">4.0.4.</span> <span class="nav-text">mounted</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeUpdate"><span class="nav-number">4.0.5.</span> <span class="nav-text">beforeUpdate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#updated"><span class="nav-number">4.0.6.</span> <span class="nav-text">updated</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeDestroy"><span class="nav-number">4.0.7.</span> <span class="nav-text">beforeDestroy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#destroyed"><span class="nav-number">4.0.8.</span> <span class="nav-text">destroyed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#activated"><span class="nav-number">4.0.9.</span> <span class="nav-text">activated</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deactivated"><span class="nav-number">4.0.10.</span> <span class="nav-text">deactivated</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue组件通信方法"><span class="nav-number">5.</span> <span class="nav-text">Vue组件通信方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#props和-emit-父子"><span class="nav-number">5.0.1.</span> <span class="nav-text">props和$emit(父子)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attrs和-listeners-父子"><span class="nav-number">5.0.2.</span> <span class="nav-text">$attrs和$listeners(父子)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EventBus-中央事件总线-（任意）"><span class="nav-number">5.0.3.</span> <span class="nav-text">EventBus(中央事件总线)（任意）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#provide和inject（父子）"><span class="nav-number">5.0.4.</span> <span class="nav-text">provide和inject（父子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-model（父子）"><span class="nav-number">5.0.5.</span> <span class="nav-text">v-model（父子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parent和-children"><span class="nav-number">5.0.6.</span> <span class="nav-text">$parent和$children</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vuex"><span class="nav-number">5.0.7.</span> <span class="nav-text">vuex</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化data"><span class="nav-number">6.</span> <span class="nav-text">初始化data</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gzzzh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
