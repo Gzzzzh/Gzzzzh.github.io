@@ -73,6 +73,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="Gzzzh" type="application/atom+xml">
 
@@ -89,10 +91,12 @@
 <meta property="og:site_name" content="Gzzzh">
 <meta property="og:description" content="前言这篇文章会记录我的一些综合知识点笔记，方便自己进行复习，长期施工…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-06T10:41:13.316Z">
+<meta property="og:image" content="https://static.oschina.net/uploads/space/2017/1018/140708_XDkc_990211.png">
+<meta property="og:updated_time" content="2019-09-15T15:18:46.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="综合知识点">
 <meta name="twitter:description" content="前言这篇文章会记录我的一些综合知识点笔记，方便自己进行复习，长期施工…">
+<meta name="twitter:image" content="https://static.oschina.net/uploads/space/2017/1018/140708_XDkc_990211.png">
 
 
 
@@ -423,7 +427,115 @@
 <li>构建CSSOM树</li>
 <li>根据DOM树和CSSOM树构建渲染树，从根节点开始遍历DOM树的可见节点，不可见的为displaynone和meta，script等。对于每个节点都在CSSOM树种找到对应的规则并应用</li>
 </ol>
-<h3 id="js解析"><a href="#js解析" class="headerlink" title="js解析"></a>js解析</h3>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>工厂作用就是隐藏创建实例的复杂过程，只需要提供一个接口，往其传递参数就能得到对应实例。</p>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>全局缓存，全局状态管理等等这些只需要一个对象，我们可以使用单例模式确保全局只能访问这一个对象，用一个变量确保对象只产生一个</p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>适配器模式用来解决两个接口不兼容的情况，不需要改变已有接口，通过一层包装的方式实现两个接口的正常运作。例如在Vue中父组件传递给子组件一个时间戳，子组件一般会用computed来转换，这个过程用到了适配器模式</p>
+<h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><p>就是JS中的事件代理，一个ul中有多个li，我们可以通过绑定ul的点击事件，通过事件冒泡获得当前点击的li</p>
+<h3 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h3><p>发布订阅模式也叫观察者模式，通过一对一或者一对多的依赖关系，当对象发生改变时，订阅方会收到通知。例如我们点击一个按钮触发事件就用到了该模式。在Vue中如何实现响应式也用到了这种模式</p>
+<h3 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h3><p>该模式提供了一个接口，隐藏了内部逻辑，简化了操作。例如实现一个兼容多浏览器的添加事件方法</p>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h3 id="进程的与线程的区别"><a href="#进程的与线程的区别" class="headerlink" title="进程的与线程的区别"></a>进程的与线程的区别</h3><ol>
+<li>本质上来说两个名词都是CPU工作时间片的一个描述</li>
+<li>一个进程包含多个线程，线程在进程下进行</li>
+<li>不同进程数据很难共享，同一进程不同线程容易</li>
+<li>进程更加消耗计算机资源，进程之间不会相互影响，线程挂掉一个会影响进程</li>
+<li>可以同时有多个进程，但同一进程里面的每个线程都是互斥</li>
+</ol>
+<p>例如打开一个Tab页就是创建了一个进程，其中有渲染线程，JS引擎线程，HTTP请求线程等等</p>
+<h3 id="JS单线程的好处"><a href="#JS单线程的好处" class="headerlink" title="JS单线程的好处"></a>JS单线程的好处</h3><p>JS单线程使得JS运行的时候会阻止UI渲染，可以达到节省内存，解约上下文切换，没有锁的问题的好处。如果JS执行的时候操作了DOM，UI线程也还在工作，那么就不能稳定的渲染UI了。</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>死锁是指两个或两个以上的进程在执行过程中，由于竞争资源造成的一种阻塞现象。此时系统产生了死锁，这些进程叫死锁进程。</p>
+<h3 id="产生条件"><a href="#产生条件" class="headerlink" title="产生条件"></a>产生条件</h3><ol>
+<li>互斥条件</li>
+<li>不可剥夺条件</li>
+<li>请求和保持条件</li>
+<li>环路等待条件</li>
+</ol>
+<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><ol>
+<li>竞争资源引起死锁</li>
+<li>进程推进顺序不当发生死锁</li>
+</ol>
+<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><ol>
+<li>预防死锁产生，破坏产生条件</li>
+<li>避免死锁</li>
+<li>检测并解除死锁</li>
+</ol>
+<h2 id="eventloop"><a href="#eventloop" class="headerlink" title="eventloop"></a>eventloop</h2><p>JS在执行中遇到异步的代码，会被挂起并加入到task中，一旦执行栈主线程为空，他就会从task队列中拿出需要执行的代码加入到主线程中执行。</p>
+<p>不同任何源会被分配到不同的task队列中，任务源可以分成微任务(microtask)和宏任务(macrotask)。在ES6规范中，microtask称为jobs，macrotask称为task</p>
+<h3 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h3><ul>
+<li>promise.then</li>
+<li>process.nextTick</li>
+</ul>
+<h3 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h3><ul>
+<li>script</li>
+<li>setimeout</li>
+<li>setinterval</li>
+<li>setimmediate</li>
+<li>I/O</li>
+</ul>
+<h3 id="顺序-浏览器"><a href="#顺序-浏览器" class="headerlink" title="顺序(浏览器)"></a>顺序(浏览器)</h3><ul>
+<li>执行同步代码，属于宏任务</li>
+<li>执行栈为空，执行所有微任务</li>
+<li>开始下一轮eventloop，执行宏任务中的异步代码</li>
+</ul>
+<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>cookie</th>
+<th>localStorage</th>
+<th>sessionStorage</th>
+<th>indexDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据生命周期</td>
+<td>一般由服务器生成，可以设置过期时间</td>
+<td>除非被清理，否则一直存在</td>
+<td>页面关闭就清理</td>
+<td>除非被清理，否则一直存在</td>
+</tr>
+<tr>
+<td>数据存储大小</td>
+<td>4k</td>
+<td>5M</td>
+<td>5M</td>
+<td>无限</td>
+</tr>
+<tr>
+<td>与服务端通信</td>
+<td>每次都会携带在 header 中，对于请求性能影响</td>
+<td>不参与</td>
+<td>不参与</td>
+<td>不参与</td>
+</tr>
+</tbody>
+</table>
+<h2 id="为什么操作dom慢"><a href="#为什么操作dom慢" class="headerlink" title="为什么操作dom慢"></a>为什么操作dom慢</h2><p>因为DOM属于渲染引擎中的内容，JS又是JS引擎的内容，通过JS操作DOM涉及到了两个线程的通信，势必会带来一些性能的损耗。操作DOM次数一多也就等于线程之间一直在通信，并且操作DOM可能带来重绘回流的情况，所以导致性能问题。</p>
+<h3 id="页面如何渲染几万条数据并且不卡"><a href="#页面如何渲染几万条数据并且不卡" class="headerlink" title="页面如何渲染几万条数据并且不卡"></a>页面如何渲染几万条数据并且不卡</h3><p>不能一次性将所有数据渲染出来，应该一次渲染一部分dom，需要用到requestAnimationFrame、createDocumentFragment两个api。</p>
+<h4 id="window-requestAnimationFrame"><a href="#window-requestAnimationFrame" class="headerlink" title="window.requestAnimationFrame()"></a>window.requestAnimationFrame()</h4><p>这个方法告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画</p>
+<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>DocumentFragment是DOM节点，但不是主DOM树的一部分，通常是创建文档片段将元素附加上去，然后将文档片段附加在DOM树。在DOM树中，文档片段被其所有的子元素所代替。因为文档片段在内存中，所以将子元素插入到文档片段的时候不会引起页面回流。</p>
+<h2 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h2><p>本质是监听url的变化，然后匹配路由规则，显示相应的页面，并且无需刷新页面</p>
+<h3 id="hash模式"><a href="#hash模式" class="headerlink" title="hash模式"></a>hash模式</h3><p>这个模式下url中会有个#，#后面的哈希值发生变化时，可以通过hashchange事件来监听到url的变化从而进行页面跳转，并且url请求中不会带上#后的哈希值</p>
+<h3 id="history模式"><a href="#history模式" class="headerlink" title="history模式"></a>history模式</h3><p>该模式使用history.pushState和history.replaceState改变url</p>
+<p>通过history模式改变的url同样不会引起页面的刷新，只会更新浏览器的历史记录<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新增历史记录</span></span><br><span class="line">history.pushState(stateObj,title,URL)</span><br><span class="line"><span class="comment">//替换当前历史记录</span></span><br><span class="line">history.replaceState(stateObj,title,URL)</span><br><span class="line"></span><br><span class="line"><span class="comment">//当用户做出浏览器动作时，比如点击后退按钮会触发popState事件</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popState'</span>,e =&gt; &#123;</span><br><span class="line">    <span class="comment">//e.state就是之前那个stateObj</span></span><br><span class="line">    <span class="built_in">console</span>.log(e.state)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="UDP和TCP的区别"><a href="#UDP和TCP的区别" class="headerlink" title="UDP和TCP的区别"></a>UDP和TCP的区别</h2><h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><h4 id="1-面向无连接"><a href="#1-面向无连接" class="headerlink" title="1.面向无连接"></a>1.面向无连接</h4><p>UDP不像TCP一样发送数据前进行三次握手建立连接，想发数据就发送，只是数据报文搬运工不会进行拆分拼接操作</p>
+<h4 id="2-不可靠性"><a href="#2-不可靠性" class="headerlink" title="2.不可靠性"></a>2.不可靠性</h4><p>体现在无连接上，通信不需要连接想发就发。并且受到什么数据就传递什么数据，不会进行备份，也不关心对方是否正确收到。UDP使用恒定速度发送数据，网络条件不好可能导致丢包。</p>
+<h4 id="3-高效"><a href="#3-高效" class="headerlink" title="3.高效"></a>3.高效</h4><p>头部开销小，而且因为不可靠，不需要保证数据不丢失准确到达，所以传输时很高效。因此直播和竞技游戏会使用UDP</p>
+<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>反着来</p>
+<h4 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h4><ul>
+<li>在TCP中，两端其实都维护着窗口：分别为发送端窗口和接收端窗口</li>
+<li>发送端窗口包含已发送但未收到应答的数据和可以发送但是未发送的数据</li>
+<li>发送端窗口是由接收端剩余大小决定的，接收方会把当前接收窗口的剩余大小写入应答报文，发送端应答后根据该值和当前网络拥塞情况设置发送窗口的大小，所以发送窗口大小是不断变化的</li>
+<li>当发送端接收到应答报文后，会随之将窗口进行滑动<br><img src="https://static.oschina.net/uploads/space/2017/1018/140708_XDkc_990211.png" alt></li>
+</ul>
+<ol>
+<li>我们一共需要发送900字节数据。可发送数据为1-500字节，尚未发送数据。假设首先发送400字节的数据。</li>
+<li>发送了400字节后，对端返回一个ack表示收到200序号之内的数据且窗口通告为500。于是如图示，窗口向前滑动了200字节。当前已发送未确认字节序号为200-400,可发送字节序号为401-700,假设在此尚未发送数据。</li>
+<li>对端返回一个ack表示收到400序号内的数据且窗口通告为400。于是如图示，窗口向前滑动了200字节。已确认数据序号为1-400，可发送数据为401-800。</li>
+</ol>
+<p>他帮助TCP实现了流量控制的功能，接收方通过报文告知发送方还可以发送多少数据，从而保证接收方能够来得及接收数据，防止出现接收方带宽已满，但发送方一直发送数据</p>
+<h4 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h4><p>防止过多数据拥塞网络，避免出现网络负载过大的情况。包括四个算法：慢开始，拥塞避免，快速重传，快速恢复</p>
+
       
     </div>
     
@@ -462,6 +574,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/15/HTML知识点/" rel="prev" title="HTML知识点">
+                HTML知识点 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -538,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -551,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -591,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端性能优化"><span class="nav-number">2.</span> <span class="nav-text">前端性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题产生和解决"><span class="nav-number">3.</span> <span class="nav-text">跨域问题产生和解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同源策略"><span class="nav-number">3.1.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要有同源策略"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用解决办法"><span class="nav-number">3.3.</span> <span class="nav-text">常用解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsonp"><span class="nav-number">3.3.1.</span> <span class="nav-text">jsonp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS-跨域资源共享"><span class="nav-number">3.4.</span> <span class="nav-text">CORS(跨域资源共享)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-反向代理接口跨域"><span class="nav-number">3.5.</span> <span class="nav-text">nginx(反向代理接口跨域)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML和JSON的区别"><span class="nav-number">4.</span> <span class="nav-text">XML和JSON的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见web安全及防护原理"><span class="nav-number">5.</span> <span class="nav-text">常见web安全及防护原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入攻击"><span class="nav-number">5.1.</span> <span class="nav-text">sql注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS原理"><span class="nav-number">5.2.</span> <span class="nav-text">XSS原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sorf"><span class="nav-number">5.3.</span> <span class="nav-text">sorf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码安全"><span class="nav-number">5.4.</span> <span class="nav-text">密码安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">6.</span> <span class="nav-text">浏览器缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取缓存流程"><span class="nav-number">6.1.</span> <span class="nav-text">获取缓存流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强缓存"><span class="nav-number">6.1.1.</span> <span class="nav-text">强缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.2.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协商缓存"><span class="nav-number">6.2.1.</span> <span class="nav-text">协商缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-number">6.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入URL到页面展示的过程"><span class="nav-number">7.</span> <span class="nav-text">输入URL到页面展示的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入url"><span class="nav-number">7.1.</span> <span class="nav-text">输入url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存-1"><span class="nav-number">7.2.</span> <span class="nav-text">浏览器缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS查找"><span class="nav-number">7.3.</span> <span class="nav-text">DNS查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立http链接"><span class="nav-number">7.4.</span> <span class="nav-text">建立http链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么需要进行三次握手"><span class="nav-number">7.4.1.</span> <span class="nav-text">为什么需要进行三次握手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析请求头"><span class="nav-number">7.5.</span> <span class="nav-text">解析请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP响应"><span class="nav-number">7.6.</span> <span class="nav-text">HTTP响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么需要进行四次挥手"><span class="nav-number">7.6.1.</span> <span class="nav-text">为什么需要进行四次挥手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理响应数据"><span class="nav-number">7.7.</span> <span class="nav-text">处理响应数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js解析"><span class="nav-number">7.8.</span> <span class="nav-text">js解析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端性能优化"><span class="nav-number">2.</span> <span class="nav-text">前端性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题产生和解决"><span class="nav-number">3.</span> <span class="nav-text">跨域问题产生和解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同源策略"><span class="nav-number">3.1.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要有同源策略"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要有同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用解决办法"><span class="nav-number">3.3.</span> <span class="nav-text">常用解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsonp"><span class="nav-number">3.3.1.</span> <span class="nav-text">jsonp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS-跨域资源共享"><span class="nav-number">3.4.</span> <span class="nav-text">CORS(跨域资源共享)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-反向代理接口跨域"><span class="nav-number">3.5.</span> <span class="nav-text">nginx(反向代理接口跨域)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML和JSON的区别"><span class="nav-number">4.</span> <span class="nav-text">XML和JSON的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见web安全及防护原理"><span class="nav-number">5.</span> <span class="nav-text">常见web安全及防护原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql注入攻击"><span class="nav-number">5.1.</span> <span class="nav-text">sql注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS原理"><span class="nav-number">5.2.</span> <span class="nav-text">XSS原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sorf"><span class="nav-number">5.3.</span> <span class="nav-text">sorf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码安全"><span class="nav-number">5.4.</span> <span class="nav-text">密码安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">6.</span> <span class="nav-text">浏览器缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取缓存流程"><span class="nav-number">6.1.</span> <span class="nav-text">获取缓存流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强缓存"><span class="nav-number">6.1.1.</span> <span class="nav-text">强缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.2.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协商缓存"><span class="nav-number">6.2.1.</span> <span class="nav-text">协商缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-1"><span class="nav-number">6.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入URL到页面展示的过程"><span class="nav-number">7.</span> <span class="nav-text">输入URL到页面展示的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入url"><span class="nav-number">7.1.</span> <span class="nav-text">输入url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器缓存-1"><span class="nav-number">7.2.</span> <span class="nav-text">浏览器缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS查找"><span class="nav-number">7.3.</span> <span class="nav-text">DNS查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立http链接"><span class="nav-number">7.4.</span> <span class="nav-text">建立http链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么需要进行三次握手"><span class="nav-number">7.4.1.</span> <span class="nav-text">为什么需要进行三次握手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析请求头"><span class="nav-number">7.5.</span> <span class="nav-text">解析请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP响应"><span class="nav-number">7.6.</span> <span class="nav-text">HTTP响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么需要进行四次挥手"><span class="nav-number">7.6.1.</span> <span class="nav-text">为什么需要进行四次挥手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理响应数据"><span class="nav-number">7.7.</span> <span class="nav-text">处理响应数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">8.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式"><span class="nav-number">8.1.</span> <span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">8.2.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式"><span class="nav-number">8.3.</span> <span class="nav-text">适配器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式"><span class="nav-number">8.4.</span> <span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布订阅模式"><span class="nav-number">8.5.</span> <span class="nav-text">发布订阅模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外观模式"><span class="nav-number">8.6.</span> <span class="nav-text">外观模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程"><span class="nav-number">9.</span> <span class="nav-text">进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的与线程的区别"><span class="nav-number">9.1.</span> <span class="nav-text">进程的与线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS单线程的好处"><span class="nav-number">9.2.</span> <span class="nav-text">JS单线程的好处</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">10.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#产生条件"><span class="nav-number">10.1.</span> <span class="nav-text">产生条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产生原因"><span class="nav-number">10.2.</span> <span class="nav-text">产生原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理"><span class="nav-number">10.3.</span> <span class="nav-text">处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eventloop"><span class="nav-number">11.</span> <span class="nav-text">eventloop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微任务"><span class="nav-number">11.1.</span> <span class="nav-text">微任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宏任务"><span class="nav-number">11.2.</span> <span class="nav-text">宏任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序-浏览器"><span class="nav-number">11.3.</span> <span class="nav-text">顺序(浏览器)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储"><span class="nav-number">12.</span> <span class="nav-text">存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么操作dom慢"><span class="nav-number">13.</span> <span class="nav-text">为什么操作dom慢</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面如何渲染几万条数据并且不卡"><span class="nav-number">13.1.</span> <span class="nav-text">页面如何渲染几万条数据并且不卡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#window-requestAnimationFrame"><span class="nav-number">13.1.1.</span> <span class="nav-text">window.requestAnimationFrame()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#document-createDocumentFragment"><span class="nav-number">13.1.2.</span> <span class="nav-text">document.createDocumentFragment()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端路由"><span class="nav-number">14.</span> <span class="nav-text">前端路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hash模式"><span class="nav-number">14.1.</span> <span class="nav-text">hash模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#history模式"><span class="nav-number">14.2.</span> <span class="nav-text">history模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP和TCP的区别"><span class="nav-number">15.</span> <span class="nav-text">UDP和TCP的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP"><span class="nav-number">15.1.</span> <span class="nav-text">UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-面向无连接"><span class="nav-number">15.1.1.</span> <span class="nav-text">1.面向无连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-不可靠性"><span class="nav-number">15.1.2.</span> <span class="nav-text">2.不可靠性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-高效"><span class="nav-number">15.1.3.</span> <span class="nav-text">3.高效</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">15.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动窗口"><span class="nav-number">15.2.1.</span> <span class="nav-text">滑动窗口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拥塞控制"><span class="nav-number">15.2.2.</span> <span class="nav-text">拥塞控制</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

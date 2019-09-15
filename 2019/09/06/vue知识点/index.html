@@ -68,12 +68,10 @@
 
 
 
-  <meta name="keywords" content="Vue,面试题,">
+  <meta name="keywords" content="面试题,Vue,">
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="Gzzzh" type="application/atom+xml">
@@ -84,7 +82,7 @@
 
 
 <meta name="description" content="前言这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…">
-<meta name="keywords" content="Vue,面试题">
+<meta name="keywords" content="面试题,Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue知识点">
 <meta property="og:url" content="https://gzzzzh.github.io/2019/09/06/vue知识点/index.html">
@@ -92,7 +90,11 @@
 <meta property="og:description" content="前言这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog-1257601889.cos.ap-shanghai.myqcloud.com/vue/vue-mvvm-jiagou.png">
-<meta property="og:updated_time" content="2019-09-06T10:25:50.075Z">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191016162-1229549117.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191056146-436654927.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191119318-368188268.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191142334-13876328.png">
+<meta property="og:updated_time" content="2019-09-15T15:20:20.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue知识点">
 <meta name="twitter:description" content="前言这篇文章会记录我的一些Vue知识点笔记，方便自己进行复习，长期施工…">
@@ -342,6 +344,41 @@
 <h3 id="v-model（父子）"><a href="#v-model（父子）" class="headerlink" title="v-model（父子）"></a>v-model（父子）</h3><p>父组件通过v-model传递值给子组件时，会自动传递一个value的prop属性，在子组件中通过this.$emit(‘input’,val)可以自动修改v-model的值</p>
 <h3 id="parent和-children"><a href="#parent和-children" class="headerlink" title="$parent和$children"></a>$parent和$children</h3><p>可以获取父组件实例和子组件实例<br>this.$children是个数组</p>
 <h3 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h3><p>单独详解</p>
+<h2 id="sync用法"><a href="#sync用法" class="headerlink" title="sync用法"></a>sync用法</h2><h3 id="子组件"><a href="#子组件" class="headerlink" title="子组件"></a>子组件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'update:title'</span>,newValue)</span><br></pre></td></tr></table></figure>
+<h3 id="父组件"><a href="#父组件" class="headerlink" title="父组件"></a>父组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">text-document</span> <span class="attr">:title.sync</span>=<span class="string">"doc.title"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="虚拟Dom"><a href="#虚拟Dom" class="headerlink" title="虚拟Dom"></a>虚拟Dom</h2><h3 id="什么是虚拟DOM"><a href="#什么是虚拟DOM" class="headerlink" title="什么是虚拟DOM"></a>什么是虚拟DOM</h3><p>用js对象模拟dom元素和嵌套关系，实现页面页面元素高效更新<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">title</span>= <span class="string">"name"</span>&gt;</span></span><br><span class="line">ccccc </span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>dhhhh<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = &#123;</span><br><span class="line">  tagName: <span class="string">'div'</span>,</span><br><span class="line">  attrs:&#123;</span><br><span class="line">    id: <span class="string">"name"</span> ，</span><br><span class="line">    title: <span class="string">"name"</span>   </span><br><span class="line">&#125;,</span><br><span class="line">childrens: [</span><br><span class="line">  <span class="string">'ccccc'</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      tagName: <span class="string">'p'</span>,</span><br><span class="line">      attrs:&#123;&#125;,</span><br><span class="line">      childrens: [</span><br><span class="line">          <span class="string">'dhhhh'</span>,</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="为什么v-for中需要加key"><a href="#为什么v-for中需要加key" class="headerlink" title="为什么v-for中需要加key"></a>为什么v-for中需要加key</h2><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>key的主要作用是为了高效的更新虚拟dom</p>
+<h3 id="diff算法"><a href="#diff算法" class="headerlink" title="diff算法"></a>diff算法</h3><ol>
+<li>两个相同的组件产生类似的DOM结构，不同的组件产生不同的DOM结构</li>
+<li>同一层级的一组结点，他们可以通过唯一的ID进行区分</li>
+</ol>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191016162-1229549117.png" alt></p>
+<p>当页面数据发生变化的时候，diff算法只会比较同一层的结点：</p>
+<ol>
+<li><strong>如果节点类型不同，直接干掉前面的节点，再创建并插入新节点，不会再比较这个节点以后的子节点了</strong></li>
+<li><strong>如果节点类型相同，则会重新设置该节点的属性，从而实现节点的更新</strong></li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191056146-436654927.png" alt></p>
+<p>我们希望在B和C之间插入F，默认diff算法是这样：</p>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191119318-368188268.png" alt></p>
+<p>它会把C更新为F，D更新成C，以此类推，最后插入一个E，效率很低</p>
+<p>所以我们需要使用key来给每个节点做一个唯一标识，diff算法可以正确识别此节点，找到正确位置区插入新节点</p>
+<p>在原数据发生改变时，如果有key就能追踪到具体哪一项或者哪几项数据发生了变化，就能只更新改变数据对应的dom</p>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191142334-13876328.png" alt></p>
+<h3 id="在v-for中key值为什么不用index"><a href="#在v-for中key值为什么不用index" class="headerlink" title="在v-for中key值为什么不用index"></a>在v-for中key值为什么不用index</h3><p>当原数据发生位置变换，比如说第一项数据挪到第二项，但你的key值还是不变，vue为了更新对比视图，就必须整个dom重新渲染，白白耗费很多性能。</p>
+<p>此时list的item是select的选项，如果.是3(此时index是2)是选中的，将2删除了，用index作为key就会发现3,4的key改变了需要重新渲染，重新渲染的时候记录index为2的是选中的，于是变成了4(此时index为2)被选中</p>
+<p>如果用唯一id作为key，删除了2之后剩下的3,4key也没有变，不会被重新渲染不会出现以上bug</p>
+<h2 id="v-show和v-if的区别"><a href="#v-show和v-if的区别" class="headerlink" title="v-show和v-if的区别"></a>v-show和v-if的区别</h2><h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p>在display：none和display：block之间来回切换。无论初始条件是什么都会被渲染出来，后面只是切换css，dom一直保留。因此他在初始渲染有更高开销，但切换开销较小，适合频繁切换的场景</p>
+<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><p>当初始值为false，组件不会被渲染，直到条件为true。在切换条件时会触发销毁或挂载组件，所以总的来说切换时开销更高，适合不经常切换的场景</p>
+<h2 id="组件中的data为什么是函数？"><a href="#组件中的data为什么是函数？" class="headerlink" title="组件中的data为什么是函数？"></a>组件中的data为什么是函数？</h2><ul>
+<li>组件复用时所有组件实例对会共享data，如果data是个对象的话，就会造成一个组件修改data影响到其他组件的，所以需要将data写成函数，每次用到就调用一次函数获得新的数据</li>
+<li>当我们使用new Vue的方式时，无论我们将data设置成什么都可以，因为这个方法生成一个根组件，该组件不会被复用</li>
+</ul>
+<h2 id="Vue-nextTick原理"><a href="#Vue-nextTick原理" class="headerlink" title="Vue.nextTick原理"></a>Vue.nextTick原理</h2><p>Vue在观察到数据变化时并不是直接更新DOM，而是开启一个队列，并缓存同一事件循环中发生的所有改变，缓存时去除重复数据避免不必要的计算和DOM操作。同步任务执行完毕后开始执行异步队列的任务，会使用原生的Promise.then和MutationObserver方法，如果不支持会使用setTimeout(fn,0)代替，目的是延迟函数到DOM更新之后用</p>
+<p>简单来说就是同步代码执行→查找异步队列，推入执行栈(更新DOM)→执行Vue.nextTick</p>
+<h2 id="computed和watch的区别"><a href="#computed和watch的区别" class="headerlink" title="computed和watch的区别"></a>computed和watch的区别</h2><h3 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h3><p>computed是计算属性，依赖其他属性计算值，并且有缓存，只有当计算值有变化时才会返回内容，一般来说需要依赖别的属性来动态获得值的时候就可以使用</p>
+<h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><p>watch监听到值的变化就会执行回调，在回调中可以做一些逻辑操作，包括异步，对于监听值变化需要做一些复杂业务逻辑的情况可以使用watch</p>
 <h2 id="初始化data"><a href="#初始化data" class="headerlink" title="初始化data"></a>初始化data</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(<span class="keyword">this</span>.data,<span class="keyword">this</span>.$options.data())</span><br></pre></td></tr></table></figure>
 <p>this.data是表示当前的改变后的this中的数据，而this.$options.data()是表示没有赋值前的this中的数据</p>
 
@@ -361,9 +398,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Vue/" rel="tag"># Vue</a>
-          
             <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
           
         </div>
       
@@ -465,7 +502,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -478,7 +515,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -518,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向数据绑定原理"><span class="nav-number">2.</span> <span class="nav-text">双向数据绑定原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVVM的理解"><span class="nav-number">3.</span> <span class="nav-text">MVVM的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM是Model-View-ViewModel缩写"><span class="nav-number">3.1.</span> <span class="nav-text">MVVM是Model-View-ViewModel缩写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue生命周期"><span class="nav-number">4.</span> <span class="nav-text">Vue生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeCreate"><span class="nav-number">4.1.</span> <span class="nav-text">beforeCreate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#created"><span class="nav-number">4.2.</span> <span class="nav-text">created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeMount"><span class="nav-number">4.3.</span> <span class="nav-text">beforeMount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mounted"><span class="nav-number">4.4.</span> <span class="nav-text">mounted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeUpdate"><span class="nav-number">4.5.</span> <span class="nav-text">beforeUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updated"><span class="nav-number">4.6.</span> <span class="nav-text">updated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeDestroy"><span class="nav-number">4.7.</span> <span class="nav-text">beforeDestroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#destroyed"><span class="nav-number">4.8.</span> <span class="nav-text">destroyed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activated"><span class="nav-number">4.9.</span> <span class="nav-text">activated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deactivated"><span class="nav-number">4.10.</span> <span class="nav-text">deactivated</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue组件通信方法"><span class="nav-number">5.</span> <span class="nav-text">Vue组件通信方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props和-emit-父子"><span class="nav-number">5.1.</span> <span class="nav-text">props和$emit(父子)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attrs和-listeners-父子"><span class="nav-number">5.2.</span> <span class="nav-text">$attrs和$listeners(父子)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventBus-中央事件总线-（任意）"><span class="nav-number">5.3.</span> <span class="nav-text">EventBus(中央事件总线)（任意）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provide和inject（父子）"><span class="nav-number">5.4.</span> <span class="nav-text">provide和inject（父子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-model（父子）"><span class="nav-number">5.5.</span> <span class="nav-text">v-model（父子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent和-children"><span class="nav-number">5.6.</span> <span class="nav-text">$parent和$children</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex"><span class="nav-number">5.7.</span> <span class="nav-text">vuex</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化data"><span class="nav-number">6.</span> <span class="nav-text">初始化data</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向数据绑定原理"><span class="nav-number">2.</span> <span class="nav-text">双向数据绑定原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVVM的理解"><span class="nav-number">3.</span> <span class="nav-text">MVVM的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM是Model-View-ViewModel缩写"><span class="nav-number">3.1.</span> <span class="nav-text">MVVM是Model-View-ViewModel缩写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue生命周期"><span class="nav-number">4.</span> <span class="nav-text">Vue生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeCreate"><span class="nav-number">4.1.</span> <span class="nav-text">beforeCreate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#created"><span class="nav-number">4.2.</span> <span class="nav-text">created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeMount"><span class="nav-number">4.3.</span> <span class="nav-text">beforeMount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mounted"><span class="nav-number">4.4.</span> <span class="nav-text">mounted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeUpdate"><span class="nav-number">4.5.</span> <span class="nav-text">beforeUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updated"><span class="nav-number">4.6.</span> <span class="nav-text">updated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeDestroy"><span class="nav-number">4.7.</span> <span class="nav-text">beforeDestroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#destroyed"><span class="nav-number">4.8.</span> <span class="nav-text">destroyed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activated"><span class="nav-number">4.9.</span> <span class="nav-text">activated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deactivated"><span class="nav-number">4.10.</span> <span class="nav-text">deactivated</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue组件通信方法"><span class="nav-number">5.</span> <span class="nav-text">Vue组件通信方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props和-emit-父子"><span class="nav-number">5.1.</span> <span class="nav-text">props和$emit(父子)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attrs和-listeners-父子"><span class="nav-number">5.2.</span> <span class="nav-text">$attrs和$listeners(父子)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EventBus-中央事件总线-（任意）"><span class="nav-number">5.3.</span> <span class="nav-text">EventBus(中央事件总线)（任意）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provide和inject（父子）"><span class="nav-number">5.4.</span> <span class="nav-text">provide和inject（父子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-model（父子）"><span class="nav-number">5.5.</span> <span class="nav-text">v-model（父子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent和-children"><span class="nav-number">5.6.</span> <span class="nav-text">$parent和$children</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vuex"><span class="nav-number">5.7.</span> <span class="nav-text">vuex</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sync用法"><span class="nav-number">6.</span> <span class="nav-text">sync用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子组件"><span class="nav-number">6.1.</span> <span class="nav-text">子组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件"><span class="nav-number">6.2.</span> <span class="nav-text">父组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟Dom"><span class="nav-number">7.</span> <span class="nav-text">虚拟Dom</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是虚拟DOM"><span class="nav-number">7.1.</span> <span class="nav-text">什么是虚拟DOM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么v-for中需要加key"><span class="nav-number">8.</span> <span class="nav-text">为什么v-for中需要加key</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff算法"><span class="nav-number">8.2.</span> <span class="nav-text">diff算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">8.3.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在v-for中key值为什么不用index"><span class="nav-number">8.4.</span> <span class="nav-text">在v-for中key值为什么不用index</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-show和v-if的区别"><span class="nav-number">9.</span> <span class="nav-text">v-show和v-if的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v-show"><span class="nav-number">9.1.</span> <span class="nav-text">v-show</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-if"><span class="nav-number">9.2.</span> <span class="nav-text">v-if</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件中的data为什么是函数？"><span class="nav-number">10.</span> <span class="nav-text">组件中的data为什么是函数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-nextTick原理"><span class="nav-number">11.</span> <span class="nav-text">Vue.nextTick原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computed和watch的区别"><span class="nav-number">12.</span> <span class="nav-text">computed和watch的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#computed"><span class="nav-number">12.1.</span> <span class="nav-text">computed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#watch"><span class="nav-number">12.2.</span> <span class="nav-text">watch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化data"><span class="nav-number">13.</span> <span class="nav-text">初始化data</span></a></li></ol></div>
             
 
           </div>
